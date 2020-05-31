@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello Azure Pipelines!"
+    return "Stay inside, stay safe and keep social distancing."
 
 if __name__ == '__main__':
     app.run()
