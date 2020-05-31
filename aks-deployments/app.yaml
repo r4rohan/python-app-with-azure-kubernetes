@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: spring-boot-app
+  name: test
   labels:
-    name: spring-boot-app
+    name: test
 spec:
   replicas: 1
   minReadySeconds: 60
@@ -15,45 +15,38 @@ spec:
   template:
     metadata:
       labels:
-        name: spring-boot-app
+        name: test
     spec:
       containers:
-      - name: spring-boot-app
-        image: cloudorbit.azurecr.io/test:latest
+      - name: test
+        image: cloudorbit.azurecr.io/testimage
         imagePullPolicy: Always
-        resources:
-          requests:
-            memory: "500Mi"
-            cpu: "500m"
-          limits:
-            memory: "1000Mi"
-            cpu: "1000m"
 
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: spring-boot-app
+  name: test
 spec:
   selector:
-    name: spring-boot-app
+    name: test
   ports:
   - name: port1
     protocol: TCP
-    port: 5001
-    targetPort: 5001
+    port: 5000
+    targetPort: 5000
   type: ClusterIP
 
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: spring-boot-app
+  name: test
 spec:
   maxReplicas: 2
   minReplicas: 1
   scaleTargetRef:
     apiVersion: extensions/v1beta1
     kind: Deployment
-    name: spring-boot-app
+    name: test
   targetCPUUtilizationPercentage: 80
