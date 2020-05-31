@@ -1,0 +1,53 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  imageName: 'springboot-aks'
+  dockerfilePath: 'app/Dockerfile'
+  azureContainerRegistry: SpringBootContainerRegistry.azurecr.io
+  azureResourceGroup: spring-boot-aks
+  kubernetesCluster: kubernetes-cluster 
+  kubernetesNamespace: dev
+
+- stage: Build
+  displayName: Build and push docker image to acr
+  jobs:  
+  - job: Build
+    displayName: Build job
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(azureContainerRegistry)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          latest
+          $COMMIT_SHA
+
+# deploying containers on aks pulled from azure container registry
+jobs:
+- deployment:
+  displayName: Deploy to AKS
+  pool:
+    vmImage: $(vmImage)
+  environment: dev
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - task: KubernetesManifest@0
+          displayName: Deploy
+          inputs:
+            action: deploy
+            namespace: $(kubernetesNamespace)
+            manifests: aks-deployments/app.yaml
+            containers: |
+              $(azureContainerRegistry)/$(imageName):$COMMIT_SHA
+              $(azureContainerRegistry)/$(imageName):latest
