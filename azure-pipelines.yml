@@ -53,7 +53,7 @@ stages:
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
-    environment: 'r4rohanspringbootappwithazurekubernetes-4948.dev'
+    environment: 'dev'
     strategy:
       runOnce:
         deploy:
@@ -71,8 +71,6 @@ stages:
               action: deploy
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
-                $(Pipeline.Workspace)/manifests/service.yml
-                $(Pipeline.Workspace)/manifests/hpa.yml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
