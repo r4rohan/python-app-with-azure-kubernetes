@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: acr.io/smartcity-256317/dev/ms/spring-boot-app:latest
+        image: cloudorbit.azurecr.io/test:latest
         imagePullPolicy: Always
         resources:
           requests:
