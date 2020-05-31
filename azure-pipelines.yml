@@ -14,7 +14,7 @@ variables:
   dockerRegistryServiceConnection: '7a835dcd-1a3e-4639-836d-a153edbc9200'
   imageRepository: 'pythonapp'
   containerRegistry: 'cloudorbit.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: 'spring-boot-application/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'cloudorbit20643a8f-auth'
 
@@ -69,8 +69,7 @@ stages:
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
-              manifests: |
-                $(Pipeline.Workspace)/aks-deployments/app.yaml
+              manifests: aks-deployments/app.yaml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
