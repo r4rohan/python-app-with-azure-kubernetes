@@ -9,7 +9,7 @@ variables:
   dockerfilePath: 'app/Dockerfile'
   azureContainerRegistry: 'SpringBootContainerRegistry.azurecr.io'
   azureResourceGroup: 'spring-boot-aks'
-  kubernetesCluster: 'kubernetes-cluster' 
+  kubernetesCluster: 'kubernetes-cluster'
   kubernetesNamespace: 'dev'
   tag: '$(Build.BuildId)'
 
