@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: pythonapp 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pythonapp 
+    spec:
+      containers:
+        - name: pythonapp 
+          image: cloudorbit.azurecr.io/pythonapp
+          ports:
+          - containerPort: 5000
