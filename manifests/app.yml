@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: test
-        image: cloudorbit.azurecr.io/python-app
+        image: cloudorbit.azurecr.io/pythonapp
         imagePullPolicy: Always
 
 ---
