@@ -7,10 +7,11 @@ pool:
 variables:
   imageName: 'springboot-aks'
   dockerfilePath: 'app/Dockerfile'
-  azureContainerRegistry: SpringBootContainerRegistry.azurecr.io
-  azureResourceGroup: spring-boot-aks
-  kubernetesCluster: kubernetes-cluster 
-  kubernetesNamespace: dev
+  azureContainerRegistry: 'SpringBootContainerRegistry.azurecr.io'
+  azureResourceGroup: 'spring-boot-aks'
+  kubernetesCluster: 'kubernetes-cluster' 
+  kubernetesNamespace: 'dev'
+  tag: '$(Build.BuildId)'
 
 - stage: Build
   displayName: Build and push docker image to acr
@@ -29,7 +30,7 @@ variables:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           latest
-          $COMMIT_SHA
+          $(tag)
 
 # deploying containers on aks pulled from azure container registry
 jobs:
