@@ -33,8 +33,8 @@ spec:
   ports:
   - name: port1
     protocol: TCP
-    port: 5000
-    targetPort: 5000
+    port: 5001
+    targetPort: 5001
   type: LoadBalancer
 
 ---
