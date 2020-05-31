@@ -5,11 +5,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  imageName: 'springboot-aks'
-  dockerfilePath: 'app/Dockerfile'
-  azureContainerRegistry: 'SpringBootContainerRegistry.azurecr.io'
-  azureResourceGroup: 'spring-boot-aks'
-  kubernetesCluster: 'kubernetes-cluster'
+  imageName: 'test'
+  dockerfilePath: 'spring-boot-application/Dockerfile'
+  azureContainerRegistry: 'cloudorbit.azurecr.io'
+  azureResourceGroup: 'cloudorbit-resource-grp'
+  kubernetesCluster: 'cloudobrit-cluster'
   kubernetesNamespace: 'dev'
   tag: '$(Build.BuildId)'
 
