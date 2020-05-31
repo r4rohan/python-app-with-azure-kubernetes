@@ -35,7 +35,7 @@ spec:
     protocol: TCP
     port: 80
     targetPort: 8080
-  type: ClusterIP
+  type: LoadBalancer
 
 ---
 apiVersion: autoscaling/v1
@@ -43,7 +43,7 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: python-app
 spec:
-  maxReplicas: 2
+  maxReplicas: 3
   minReplicas: 1
   scaleTargetRef:
     apiVersion: extensions/v1beta1
