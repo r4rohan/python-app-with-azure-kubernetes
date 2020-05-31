@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: test
+  name: python-app
   labels:
-    name: test
+    name: python-app
 spec:
   replicas: 1
   minReadySeconds: 60
@@ -15,21 +15,21 @@ spec:
   template:
     metadata:
       labels:
-        name: test
+        name: python-app
     spec:
       containers:
       - name: test
-        image: cloudorbit.azurecr.io/testimage
+        image: cloudorbit.azurecr.io/python-app
         imagePullPolicy: Always
 
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: test
+  name: python-app
 spec:
   selector:
-    name: test
+    name: python-app
   ports:
   - name: port1
     protocol: TCP
@@ -41,12 +41,12 @@ spec:
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: test
+  name: python-app
 spec:
   maxReplicas: 2
   minReplicas: 1
   scaleTargetRef:
     apiVersion: extensions/v1beta1
     kind: Deployment
-    name: test
+    name: python-app
   targetCPUUtilizationPercentage: 80
