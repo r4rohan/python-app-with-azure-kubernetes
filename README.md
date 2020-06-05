@@ -50,5 +50,5 @@ Once all done, we need to check the running pod, services and horizontal pod aut
 **For interactive UI console of k8s cluster**<br>
 `az aks browse -g cloudorbit-resource-grp -n cloudorbit-cluster`
 
-**For entering into pods***<br>
+**For entering into pods**<br>
 `kubectl -n dev exec -it [pod-name] -- /bin/bash`
