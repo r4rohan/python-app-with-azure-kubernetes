@@ -6,10 +6,10 @@ This repo is used in the Medium blog [Application Deployment with Azure Kubernet
 ### Steps
 
 **Create a resource group in Azure Subscription**<br>
-az group create -l southcentralus -n cloudorbit-resource-grp --subscription pay-as-you-go
+`az group create -l southcentralus -n cloudorbit-resource-grp --subscription pay-as-you-go`
 
 **Create Azure k8s cluster**<br>
-az aks create -g cloudorbit-resource-grp -n cloudobrit-cluster --node-vm-size Standard_B2s --node-count 2 --generate-ssh-keys
+`az aks create -g cloudorbit-resource-grp -n cloudobrit-cluster --node-vm-size Standard_B2s --node-count 2 --generate-ssh-keys`
 
 **Create Azure Container Registry**<br>
 az acr create -g cloudorbit-resource-grp -n cloudorbit --sku Standard
